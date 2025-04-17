@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cover Page Generator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #0f0f0f, #1f1f1f);
+      color: white;
+      margin: 0;
+      padding: 30px;
+    }
+    form {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      border-radius: 16px;
+      padding: 25px;
+      max-width: 600px;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      font-size: 15px;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      margin-top: 6px;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: #03a9f4;
+      color: white;
+      cursor: pointer;
+    }
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .footer-icons img {
+      width: 28px;
+      height: 28px;
+      margin: 0 8px;
+      vertical-align: middle;
+    }
+    .footer strong {
+      font-size: 20px;
+      color: white;
+      display: block;
+      margin-top: 10px;
+    }
+    #success {
+      display: none;
+      color: #0f0;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    /* Error Popup Styling */
+    .error-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #0f0f0f; /* Black background */
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      z-index: 999;
+      width: 80%;
+      max-width: 400px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    .error-popup button {
+      background-color: #03a9f4; /* Blue button for visibility */
+      padding: 8px 16px;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    /* Styling for daily visitor count */
+    #visitorCount {
+      font-size: 12px;  /* Smaller font size */
+      color: #ccc;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="coverForm">
+    <h2 style="text-align:center;">Cover Page Generator</h2>
+
+    <label for="cover_type">Choose Cover Type:</label>
+    <select name="cover_type" id="cover_type">
+        <option value="Assignment">Assignment</option>
+        <option value="Lab Report">Lab Report</option>
+    </select>
+
+    <!-- Assignment Fields (visible by default) -->
+    <div id="assignment_fields">
+        <label for="assignment_no">Assignment No:</label>
+        <input name="assignment_no" placeholder="Enter assignment no">
+
+        <label for="course_code">Course Code:</label>
+        <input name="course_code" placeholder="Enter course code">
+
+        <label for="course_title">Course Title:</label>
+        <input name="course_title" placeholder="Enter course title">
+
+        <label for="teacher_name">Teacher Name:</label>
+        <input name="teacher_name" placeholder="Enter teacher name">
+
+        <label for="teacher_designation">Teacher Designation:</label>
+        <input name="teacher_designation" placeholder="Enter teacher designation">
+
+        <label for="teacher_dept">Teacher Department:</label>
+        <input name="teacher_dept" placeholder="Enter teacher department">
+
+        <label for="student_name">Student Name:</label>
+        <input name="student_name" placeholder="Enter student name">
+
+        <label for="student_id">Student ID:</label>
+        <input name="student_id" placeholder="Enter student ID">
+
+        <label for="student_section">Section:</label>
+        <input name="student_section" placeholder="Enter section">
+
+        <label for="department_name">Department Name:</label>
+        <input name="department_name" placeholder="Enter department name">
+
+        <label for="submission_date">Submission Date:</label>
+        <input type="date" name="submission_date">
+    </div>
+
+    <!-- Lab Report Fields (hidden by default) -->
+    <div id="lab_report_fields" style="display: none;">
+        <label for="course_code">Course Code:</label>
+        <input name="course_code" placeholder="Enter course code">
+
+        <label for="course_title">Course Title:</label>
+        <input name="course_title" placeholder="Enter course title">
+
+        <label for="experiment_no">Experiment No:</label>
+        <input name="experiment_no" placeholder="Enter experiment number">
+
+        <label for="experiment_name">Experiment Name:</label>
+        <input name="experiment_name" placeholder="Enter experiment name">
+
+        <label for="teacher_name">Teacher Name:</label>
+        <input name="teacher_name" placeholder="Enter teacher name">
+
+        <label for="teacher_dept">Teacher's Department Name:</label>
+        <input name="teacher_dept" placeholder="Enter teacher's department name">
+
+        <label for="student_name">Student Name:</label>
+        <input name="student_name" placeholder="Enter student name">
+
+        <label for="student_id">Student Id:</label>
+        <input name="student_id" placeholder="Enter student id">
+
+        <label for="section">Section:</label>
+        <input name="section" placeholder="Enter section">
+
+        <label for="student_dept">Student's Department:</label>
+        <input name="student_dept" placeholder="Enter student's department">
+
+        <label for="date">Date:</label>
+        <input type="date" name="date">
+    </div>
+
+    <button type="submit" id="submitBtn">Generate Cover Page</button>
+    <button type="button" onclick="resetForm()">Reset Form</button>
+    <p id="success">✅ Cover page generated!</p>
+  </form>
+
+  <div class="footer">
+    <div class="footer-icons">
+      <a href="https://github.com/mosabbir-maruf" target="_blank"><img src="/static/github.png" alt="GitHub"></a>
+      <a href="https://www.facebook.com/mosabbir.maruf/" target="_blank"><img src="/static/facebook.png" alt="Facebook"></a>
+      <a href="https://www.instagram.com/mosabbir_maruf/" target="_blank"><img src="/static/instagram.png" alt="Instagram"></a>
+      <a href="https://bio.link/mosabbir_maruf" target="_blank"><img src="/static/biolink.png" alt="BioLink"></a>
+    </div>
+    <strong>Mosabbir Maruf</strong>
+    <p>All rights reserved.</p>
+  </div>
+
+  <!-- Error Popup -->
+  <div id="errorPopup" class="error-popup">
+    <p>Input all your information</p>
+    <button onclick="closeErrorPopup()">Close</button>
+  </div>
+
+  <div id="visitorCount">
+    <p>Daily Visitors: {{ visitor_count }}</p>
+  </div>
+
+  <script>
+    const form = document.getElementById("coverForm");
+    const successMsg = document.getElementById("success");
+    const submitBtn = document.getElementById("submitBtn");
+    const coverTypeSelect = document.getElementById("cover_type");
+    const errorPopup = document.getElementById("errorPopup");
+
+    // Show relevant fields based on cover type selection
+    coverTypeSelect.addEventListener('change', function() {
+        if (this.value === "Lab Report") {
+            document.getElementById("assignment_fields").style.display = "none";
+            document.getElementById("lab_report_fields").style.display = "block";
+        } else {
+            document.getElementById("assignment_fields").style.display = "block";
+            document.getElementById("lab_report_fields").style.display = "none";
+        }
+        localStorage.setItem('cover_type', this.value);
+    });
+
+    // On page load, retrieve cover type selection from localStorage and set it
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedCoverType = localStorage.getItem('cover_type');
+        if (savedCoverType) {
+            coverTypeSelect.value = savedCoverType;
+            if (savedCoverType === "Lab Report") {
+                document.getElementById("assignment_fields").style.display = "none";
+                document.getElementById("lab_report_fields").style.display = "block";
+            } else {
+                document.getElementById("assignment_fields").style.display = "block";
+                document.getElementById("lab_report_fields").style.display = "none";
+            }
+        }
+
+        // Restore form field values from localStorage
+        const inputs = form.querySelectorAll("input");
+        inputs.forEach(input => {
+            const saved = localStorage.getItem(input.name);
+            if (saved) input.value = saved;
+            input.addEventListener("input", () => {
+                localStorage.setItem(input.name, input.value);
+            });
+        });
+    });
+
+    // Form submission handler
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Generating...";
+
+      const formData = new FormData(form);
+      const res = await fetch("/", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        successMsg.style.display = "block";
+        window.location.href = "/download?file=" + encodeURIComponent(data.file);
+      } else {
+        showErrorPopup("Input all your information");
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Generate Cover Page";
+    });
+
+    // Show error popup
+    function showErrorPopup(message) {
+      errorPopup.style.display = "block";
+      errorPopup.querySelector('p').textContent = message;
+    }
+
+    // Close error popup
+    function closeErrorPopup() {
+      errorPopup.style.display = "none";
+    }
+
+    function resetForm() {
+      const inputs = form.querySelectorAll("input");
+      inputs.forEach(input => {
+        input.value = "";
+        localStorage.removeItem(input.name);
+      });
+      successMsg.style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
+
